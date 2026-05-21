@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الافتتاحية والاستمارة</title>
+    <style>
+        /* تصفير الهوامش لملء الشاشة بالكامل */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        /* تصميم الشاشة الافتتاحية */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff; /* لون خلفية الشاشة الافتتاحية */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+        }
+
+        /* أنيميشن خفيف للوجو ليعطي مظهر احترافي */
+        .logo-container {
+            text-align: center;
+            animation: fadeInScale 1.5s ease-out forwards;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* مؤشر تحميل بسيط تحت اللوجو */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px stroke #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* تصميم حاوية الفورم (iframe) */
+        #form-container {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشاشة الافتتاحية -->
+    <div id="splash-screen">
+        <div class="logo-container">
+            <!-- رابط اللوجو الخاص بك -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiO6Dn-B8D3jen21Zlst67thFOI1ec9uMSqw&s" alt="Logo">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- حاوية استمارة جوجل -->
+    <div id="form-container">
+        <!-- رابط الفورم الخاص بك -->
+        <iframe src="https://script.google.com/macros/s/AKfycbxawIPw0SW_YnqfOKRCvS_HMewJg2KN3bb-A3Cs2kOO69FcQghF96epy5wBDdAFv7SqHw/exec"></iframe>
+    </div>
+
+    <script>
+        // التحكم في وقت اختفاء الشاشة الافتتاحية وظهور الفورم
+        window.addEventListener('DOMContentLoaded', () => {
+            // وقت الانتظار بالملي ثانية (3000 ملي ثانية = 3 ثوانٍ)
+            const displayTime = 3000; 
+
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                const formContainer = document.getElementById('form-container');
+
+                // إخفاء الشاشة الافتتاحية بنظام الـ Fade out
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+
+                // إظهار الفورم بسلاسة
+                formContainer.style.opacity = '1';
+            }, displayTime);
+        });
+    </script>
+
+</body>
+</html>
